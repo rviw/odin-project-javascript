@@ -1,0 +1,29 @@
+{
+  "name": "odin-project-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rviw/odin-project-javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/rviw/odin-project-javascript/issues"
+  },
+  "homepage": "https://github.com/rviw/odin-project-javascript#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.0",
+    "globals": "^17.3.0",
+    "jest": "^30.2.0",
+    "prettier": "3.8.1"
+  }
+}
