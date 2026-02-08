@@ -103,4 +103,18 @@ export class LinkedList {
 
     return -1;
   }
+
+  toString() {
+    if (!this.headNode) return "";
+
+    let parts = [];
+    let current = this.headNode;
+
+    while (current) {
+      parts.push(`( ${current.value} )`);
+      current = current.nextNode;
+    }
+
+    return `${parts.join(" -> ")} -> null`;
+  }
 }

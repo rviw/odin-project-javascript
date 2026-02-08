@@ -216,3 +216,20 @@ describe("LinkedList.findIndex", () => {
     expect(list.findIndex("A")).toBe(0);
   });
 });
+
+describe("LinkedList.toString", () => {
+  test("returns empty string for an empty list", () => {
+    const list = new LinkedList();
+    expect(list.toString()).toBe("");
+  });
+
+  test("returns correct format for a non-empty list", () => {
+    const list = new LinkedList();
+
+    list.append("A");
+    list.append("B");
+    list.append("C");
+
+    expect(list.toString()).toBe("( A ) -> ( B ) -> ( C ) -> null");
+  });
+});
