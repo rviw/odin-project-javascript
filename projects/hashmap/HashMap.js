@@ -9,4 +9,19 @@ export class HashMap {
   length() {
     return this._size;
   }
+
+  hash(key) {
+    if (typeof key !== "string") {
+      throw new TypeError("HashMap only supports string keys");
+    }
+
+    let hashCode = 0;
+    const primeNumber = 31;
+
+    for (let i = 0; i < key.length; i++) {
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
+    }
+
+    return hashCode;
+  }
 }
