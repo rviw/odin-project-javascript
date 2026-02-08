@@ -180,3 +180,39 @@ describe("LinkedList.contains", () => {
     expect(list.contains("C")).toBe(false);
   });
 });
+
+describe("LinkedList.findIndex", () => {
+  test("returns -1 for an empty list", () => {
+    const list = new LinkedList();
+    expect(list.findIndex("x")).toBe(-1);
+  });
+
+  test("returns the index of the first matching value", () => {
+    const list = new LinkedList();
+
+    list.append("A");
+    list.append("B");
+
+    expect(list.findIndex("A")).toBe(0);
+    expect(list.findIndex("B")).toBe(1);
+  });
+
+  test("returns -1 when the value is not found", () => {
+    const list = new LinkedList();
+
+    list.append("A");
+    list.append("B");
+
+    expect(list.findIndex("C")).toBe(-1);
+  });
+
+  test("returns the first index when duplicates exist", () => {
+    const list = new LinkedList();
+
+    list.append("A");
+    list.append("B");
+    list.append("A");
+
+    expect(list.findIndex("A")).toBe(0);
+  });
+});
