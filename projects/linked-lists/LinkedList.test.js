@@ -277,3 +277,37 @@ describe("LinkedList.insertAt", () => {
     expect(list.toString()).toBe("( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> null");
   });
 });
+
+describe("LinkedList.removeAt", () => {
+  test("throws RangeError for out-of-bounds index", () => {
+    const list = new LinkedList();
+    expect(() => list.removeAt(0)).toThrow(RangeError);
+
+    list.append(1);
+    expect(() => list.removeAt(-1)).toThrow(RangeError);
+    expect(() => list.removeAt(1)).toThrow(RangeError);
+  });
+
+  test("removes the node at the given index", () => {
+    const list = new LinkedList();
+
+    list.append(1);
+    list.append(2);
+    list.append(3);
+
+    list.removeAt(1);
+
+    expect(list.toString()).toBe("( 1 ) -> ( 3 ) -> null");
+  });
+
+  test("removes the head when index is 0", () => {
+    const list = new LinkedList();
+
+    list.append(1);
+    list.append(2);
+
+    list.removeAt(0);
+
+    expect(list.toString()).toBe("( 2 ) -> null");
+  });
+});

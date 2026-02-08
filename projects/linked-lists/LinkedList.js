@@ -151,4 +151,25 @@ export class LinkedList {
 
     prev.nextNode = tail;
   }
+
+  removeAt(index) {
+    const size = this.size();
+    if (index < 0 || index >= size) {
+      throw new RangeError("Index out of bounds");
+    }
+
+    if (index === 0) {
+      this.headNode = this.headNode.nextNode;
+      return;
+    }
+
+    let prev = this.headNode;
+    let i = 0;
+    while (i < index - 1) {
+      prev = prev.nextNode;
+      i++;
+    }
+
+    prev.nextNode = prev.nextNode.nextNode;
+  }
 }
