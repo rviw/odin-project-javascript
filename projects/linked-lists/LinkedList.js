@@ -37,4 +37,8 @@ export class LinkedList {
 
     return count;
   }
+
+  head() {
+    return this.headNode ? this.headNode.value : undefined;
+  }
 }

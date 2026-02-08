@@ -63,3 +63,19 @@ describe("LinkedList.size", () => {
     expect(list.size()).toBe(3);
   });
 });
+
+describe("LinkedList.head", () => {
+  test("returns undefined for an empty list", () => {
+    const list = new LinkedList();
+    expect(list.head()).toBeUndefined();
+  });
+
+  test("returns the value of the first node", () => {
+    const list = new LinkedList();
+
+    list.append(1);
+    list.append(2);
+
+    expect(list.head()).toBe(1);
+  });
+});
