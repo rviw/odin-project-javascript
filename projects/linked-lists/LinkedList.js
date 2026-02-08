@@ -41,4 +41,15 @@ export class LinkedList {
   head() {
     return this.headNode ? this.headNode.value : undefined;
   }
+
+  tail() {
+    if (!this.headNode) return undefined;
+
+    let current = this.headNode;
+    while (current.nextNode) {
+      current = current.nextNode;
+    }
+
+    return current.value;
+  }
 }
