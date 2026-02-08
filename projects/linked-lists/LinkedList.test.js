@@ -46,3 +46,20 @@ describe("LinkedList.prepend", () => {
     expect(list.headNode.nextNode.nextNode.value).toBe(3);
   });
 });
+
+describe("LinkedList.size", () => {
+  test("returns 0 for an empty list", () => {
+    const list = new LinkedList();
+    expect(list.size()).toBe(0);
+  });
+
+  test("returns correct size after append and prepend", () => {
+    const list = new LinkedList();
+
+    list.append(2);
+    list.append(3);
+    list.prepend(1);
+
+    expect(list.size()).toBe(3);
+  });
+});
