@@ -154,3 +154,29 @@ describe("LinkedList.pop", () => {
     expect(list.size()).toBe(0);
   });
 });
+
+describe("LinkedList.contains", () => {
+  test("returns false for an empty list", () => {
+    const list = new LinkedList();
+    expect(list.contains("x")).toBe(false);
+  });
+
+  test("returns true when the value exists in the list", () => {
+    const list = new LinkedList();
+
+    list.append("A");
+    list.append("B");
+
+    expect(list.contains("A")).toBe(true);
+    expect(list.contains("B")).toBe(true);
+  });
+
+  test("returns false when the value does not exists in the list", () => {
+    const list = new LinkedList();
+
+    list.append("A");
+    list.append("B");
+
+    expect(list.contains("C")).toBe(false);
+  });
+});
