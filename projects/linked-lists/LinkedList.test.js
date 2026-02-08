@@ -126,7 +126,7 @@ describe("LinkedList.at", () => {
 describe("LinkedList.pop", () => {
   test("returns undefined for an empty list", () => {
     const list = new LinkedList();
-    expect(list.pop(0)).toBeUndefined();
+    expect(list.pop()).toBeUndefined();
   });
 
   test("removes the head node and returns its value", () => {
