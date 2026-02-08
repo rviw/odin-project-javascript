@@ -70,4 +70,13 @@ export class LinkedList {
 
     return undefined;
   }
+
+  pop() {
+    if (!this.headNode) return undefined;
+
+    const value = this.headNode.value;
+    this.headNode = this.headNode.nextNode;
+
+    return value;
+  }
 }

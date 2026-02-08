@@ -122,3 +122,35 @@ describe("LinkedList.at", () => {
     expect(list.at(1)).toBe("B");
   });
 });
+
+describe("LinkedList.pop", () => {
+  test("returns undefined for an empty list", () => {
+    const list = new LinkedList();
+    expect(list.pop(0)).toBeUndefined();
+  });
+
+  test("removes the head node and returns its value", () => {
+    const list = new LinkedList();
+
+    list.append(1);
+    list.append(2);
+
+    const popped = list.pop();
+
+    expect(popped).toBe(1);
+    expect(list.head()).toBe(2);
+    expect(list.size()).toBe(1);
+  });
+
+  test("works when the list has only one node", () => {
+    const list = new LinkedList();
+
+    list.append(100);
+
+    const popped = list.pop();
+
+    expect(popped).toBe(100);
+    expect(list.head()).toBeUndefined();
+    expect(list.size()).toBe(0);
+  });
+});
