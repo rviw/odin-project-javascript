@@ -52,4 +52,22 @@ export class LinkedList {
 
     return current.value;
   }
+
+  at(index) {
+    if (index < 0) return undefined;
+
+    let current = this.headNode;
+    let currentIndex = 0;
+
+    while (current) {
+      if (currentIndex === index) {
+        return current.value;
+      }
+
+      current = current.nextNode;
+      currentIndex++;
+    }
+
+    return undefined;
+  }
 }

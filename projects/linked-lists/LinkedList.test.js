@@ -95,3 +95,30 @@ describe("LinkedList.tail", () => {
     expect(list.tail()).toBe(2);
   });
 });
+
+describe("LinkedList.at", () => {
+  test("returns undefined for an empty list", () => {
+    const list = new LinkedList();
+    expect(list.at(0)).toBeUndefined();
+  });
+
+  test("returns undefined for out-of-bounds index", () => {
+    const list = new LinkedList();
+
+    list.append(1);
+    list.append(2);
+
+    expect(list.at(-1)).toBeUndefined();
+    expect(list.at(2)).toBeUndefined();
+  });
+
+  test("returns the value at the given index", () => {
+    const list = new LinkedList();
+
+    list.append("A");
+    list.append("B");
+
+    expect(list.at(0)).toBe("A");
+    expect(list.at(1)).toBe("B");
+  });
+});
