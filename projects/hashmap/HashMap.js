@@ -24,4 +24,10 @@ export class HashMap {
 
     return hashCode;
   }
+
+  _assertIndexInBounds(index) {
+    if (index < 0 || index >= this.buckets.length) {
+      throw new Error("Trying to access index out of bounds");
+    }
+  }
 }

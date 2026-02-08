@@ -51,3 +51,23 @@ describe("HashMap.hash", () => {
     expect(index).toBeLessThan(map.capacity);
   });
 });
+
+describe("HashMap bucket index bounds guard", () => {
+  test("throws error when accessing out-of-bounds bucket index", () => {
+    const map = new HashMap();
+
+    expect(() => map._assertIndexInBounds(-1)).toThrow(
+      "Trying to access index out of bounds",
+    );
+    expect(() => map._assertIndexInBounds(map.capacity)).toThrow(
+      "Trying to access index out of bounds",
+    );
+  });
+
+  test("does not throw for valid bucket index", () => {
+    const map = new HashMap();
+
+    expect(() => map._assertIndexInBounds(0)).not.toThrow();
+    expect(() => map._assertIndexInBounds(map.capacity - 1)).not.toThrow();
+  });
+});
