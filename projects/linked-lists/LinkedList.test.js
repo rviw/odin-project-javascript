@@ -23,3 +23,26 @@ describe("LinkedList.append", () => {
     expect(list.headNode.nextNode.nextNode.nextNode).toBe(null);
   });
 });
+
+describe("LinkedList.prepend", () => {
+  test("adds a node to the start of an empty list", () => {
+    const list = new LinkedList();
+
+    list.prepend(1);
+
+    expect(list.headNode.value).toBe(1);
+    expect(list.headNode.nextNode).toBe(null);
+  });
+
+  test("adds a node to the start of a non-empty list", () => {
+    const list = new LinkedList();
+
+    list.append(2);
+    list.append(3);
+    list.prepend(1);
+
+    expect(list.headNode.value).toBe(1);
+    expect(list.headNode.nextNode.value).toBe(2);
+    expect(list.headNode.nextNode.nextNode.value).toBe(3);
+  });
+});

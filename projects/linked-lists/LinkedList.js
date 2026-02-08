@@ -20,4 +20,9 @@ export class LinkedList {
 
     current.nextNode = newNode;
   }
+
+  prepend(value) {
+    const newNode = new Node(value, this.headNode);
+    this.headNode = newNode;
+  }
 }
