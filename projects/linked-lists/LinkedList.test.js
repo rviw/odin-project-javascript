@@ -233,3 +233,47 @@ describe("LinkedList.toString", () => {
     expect(list.toString()).toBe("( A ) -> ( B ) -> ( C ) -> null");
   });
 });
+
+describe("LinkedList.insertAt", () => {
+  test("throws RangeError for out-of-bounds index", () => {
+    const list = new LinkedList();
+    expect(() => list.insertAt(-1, 1)).toThrow(RangeError);
+    expect(() => list.insertAt(1, 1)).toThrow(RangeError);
+  });
+
+  test("inserts values at the given index", () => {
+    const list = new LinkedList();
+
+    list.append(1);
+    list.append(2);
+    list.append(3);
+
+    list.insertAt(1, 10, 11);
+
+    expect(list.toString()).toBe(
+      "( 1 ) -> ( 10 ) -> ( 11 ) -> ( 2 ) -> ( 3 ) -> null",
+    );
+  });
+
+  test("inserts at the head when index is 0", () => {
+    const list = new LinkedList();
+
+    list.append(2);
+    list.append(3);
+
+    list.insertAt(0, 0, 1);
+
+    expect(list.toString()).toBe("( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> null");
+  });
+
+  test("inserts at the tail when index equals size", () => {
+    const list = new LinkedList();
+
+    list.append(1);
+    list.append(2);
+
+    list.insertAt(2, 3, 4);
+
+    expect(list.toString()).toBe("( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> null");
+  });
+});
