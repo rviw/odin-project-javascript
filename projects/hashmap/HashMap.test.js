@@ -294,3 +294,45 @@ describe("HashMap.values", () => {
     expect(map.values().sort()).toEqual([1, 2, 3].sort());
   });
 });
+
+describe("HashMap.entries", () => {
+  test("returns empty array for empty map", () => {
+    const map = new HashMap();
+    expect(map.entries()).toEqual([]);
+  });
+
+  test("returns all key-value pairs (order not guaranteed)", () => {
+    const map = new HashMap();
+
+    map.set("a", 1);
+    map.set("b", 2);
+    map.set("c", 3);
+
+    expect(map.entries().sort()).toEqual(
+      [
+        ["a", 1],
+        ["b", 2],
+        ["c", 3],
+      ].sort(),
+    );
+  });
+
+  test("includes entries from collided buckets", () => {
+    const map = new HashMap();
+
+    map.capacity = 1;
+    map.buckets = Array(1).fill(null);
+
+    map.set("a", 1);
+    map.set("b", 2);
+    map.set("c", 3);
+
+    expect(map.entries().sort()).toEqual(
+      [
+        ["a", 1],
+        ["b", 2],
+        ["c", 3],
+      ].sort(),
+    );
+  });
+});
