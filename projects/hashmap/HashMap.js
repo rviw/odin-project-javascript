@@ -1,3 +1,5 @@
+import { LinkedList } from "./LinkedList.js";
+
 export class HashMap {
   constructor(loadFactor = 0.75, capacity = 16) {
     this.loadFactor = loadFactor;
@@ -29,5 +31,25 @@ export class HashMap {
     if (index < 0 || index >= this.buckets.length) {
       throw new Error("Trying to access index out of bounds");
     }
+  }
+
+  set(key, value) {
+    const index = this.hash(key);
+    this._assertIndexInBounds(index);
+
+    if (!this.buckets[index]) {
+      this.buckets[index] = new LinkedList();
+    }
+
+    const list = this.buckets[index];
+
+    const existing = list.find(key);
+    if (existing) {
+      list.append(key, value);
+      return;
+    }
+
+    list.append(key, value);
+    this._size++;
   }
 }
