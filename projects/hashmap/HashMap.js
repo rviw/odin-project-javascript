@@ -86,4 +86,9 @@ export class HashMap {
 
     return true;
   }
+
+  clear() {
+    this.buckets = Array(this.capacity).fill(null);
+    this._size = 0;
+  }
 }

@@ -208,3 +208,29 @@ describe("HashMap.remove", () => {
     expect(map.length()).toBe(1);
   });
 });
+
+describe("HashMap.clear", () => {
+  test("removes all entries and resets length to 0", () => {
+    const map = new HashMap();
+
+    map.set("a", 1);
+    map.set("b", 2);
+
+    expect(map.length()).toBe(2);
+
+    map.clear();
+
+    expect(map.length()).toBe(0);
+    expect(map.get("a")).toBeNull();
+    expect(map.get("b")).toBeNull();
+  });
+
+  test("keeps capacity the same and resets buckets array length", () => {
+    const map = new HashMap();
+
+    map.set("a", 1);
+    map.clear();
+
+    expect(map.buckets).toHaveLength(map.capacity);
+  });
+});
