@@ -144,3 +144,33 @@ describe("HashMap.get", () => {
     expect(map.get("b")).toBe(2);
   });
 });
+
+describe("HashMap.has", () => {
+  test("returns false when key does not exist", () => {
+    const map = new HashMap();
+
+    expect(map.has("apple")).toBe(false);
+  });
+
+  test("returns true when key exists", () => {
+    const map = new HashMap();
+
+    map.set("apple", "red");
+
+    expect(map.has("apple")).toBe(true);
+  });
+
+  test("works with collisions", () => {
+    const map = new HashMap();
+
+    map.capacity = 1;
+    map.buckets = Array(1).fill(null);
+
+    map.set("a", 1);
+    map.set("b", 2);
+
+    expect(map.has("a")).toBe(true);
+    expect(map.has("b")).toBe(true);
+    expect(map.has("c")).toBe(false);
+  });
+});

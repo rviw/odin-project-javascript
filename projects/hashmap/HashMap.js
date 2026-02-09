@@ -63,4 +63,8 @@ export class HashMap {
     const entry = list.find(key);
     return entry ? entry.value : null;
   }
+
+  has(key) {
+    return this.get(key) !== null;
+  }
 }
