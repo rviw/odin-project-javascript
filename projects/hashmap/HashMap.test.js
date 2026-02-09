@@ -336,3 +336,42 @@ describe("HashMap.entries", () => {
     );
   });
 });
+
+describe("HashMap growth (resize)", () => {
+  test("does not grow when overwriting an existing key", () => {
+    const map = new HashMap();
+
+    for (let i = 0; i < 12; i++) {
+      map.set(`k${i}`, `v${i}`);
+    }
+
+    expect(map.capacity).toBe(16);
+    expect(map.length()).toBe(12);
+
+    map.set("k0", "new");
+
+    expect(map.capacity).toBe(16);
+    expect(map.length()).toBe(12);
+    expect(map.get("k0")).toBe("new");
+  });
+
+  test("grows when load factor is exceeded and keeps all entries accessible", () => {
+    const map = new HashMap();
+
+    for (let i = 0; i < 12; i++) {
+      map.set(`k${i}`, `v${i}`);
+    }
+
+    expect(map.capacity).toBe(16);
+    expect(map.length()).toBe(12);
+
+    map.set("k12", "v12");
+
+    expect(map.capacity).toBe(32);
+    expect(map.length()).toBe(13);
+
+    for (let i = 0; i < 13; i++) {
+      expect(map.get(`k${i}`)).toBe(`v${i}`);
+    }
+  });
+});

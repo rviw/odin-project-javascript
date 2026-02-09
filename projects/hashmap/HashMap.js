@@ -34,6 +34,27 @@ export class HashMap {
   }
 
   set(key, value) {
+    const before = this._size;
+    this._setWithoutGrow(key, value);
+
+    if (this._size !== before && this._size / this.capacity > this.loadFactor) {
+      this._grow();
+    }
+  }
+
+  _grow() {
+    const oldEntries = this.entries();
+
+    this.capacity *= 2;
+    this.buckets = Array(this.capacity).fill(null);
+    this._size = 0;
+
+    for (const [key, value] of oldEntries) {
+      this._setWithoutGrow(key, value);
+    }
+  }
+
+  _setWithoutGrow(key, value) {
     const index = this.hash(key);
     this._assertIndexInBounds(index);
 
