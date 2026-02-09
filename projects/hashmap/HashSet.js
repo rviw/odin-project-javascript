@@ -23,5 +23,9 @@ export function createHashSet() {
     remove(key) {
       return map.remove(key);
     },
+
+    clear() {
+      map.clear();
+    },
   };
 }

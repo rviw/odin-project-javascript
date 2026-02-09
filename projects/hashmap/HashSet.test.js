@@ -87,3 +87,32 @@ describe("HashSet.remove", () => {
     expect(set.values()).toEqual([]);
   });
 });
+
+describe("HashSet.clear", () => {
+  it("removes all keys from the set", () => {
+    const set = createHashSet();
+
+    set.add("x");
+    set.add("y");
+
+    expect(set.size()).toBe(2);
+
+    set.clear();
+
+    expect(set.size()).toBe(0);
+    expect(set.values()).toEqual([]);
+    expect(set.has("x")).toBe(false);
+  });
+
+  it("allows adding again after clear", () => {
+    const set = createHashSet();
+
+    set.add("x");
+    set.clear();
+    set.add("y");
+
+    expect(set.size()).toBe(1);
+    expect(set.has("y")).toBe(true);
+    expect(set.values()).toEqual(["y"]);
+  });
+});
