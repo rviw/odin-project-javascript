@@ -106,4 +106,19 @@ export class HashMap {
 
     return result;
   }
+
+  values() {
+    const result = [];
+
+    for (let i = 0; i < this.buckets.length; i++) {
+      const bucket = this.buckets[i];
+      if (!bucket) continue;
+
+      for (const [, value] of bucket.entries()) {
+        result.push(value);
+      }
+    }
+
+    return result;
+  }
 }

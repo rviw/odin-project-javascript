@@ -264,3 +264,33 @@ describe("HashMap.keys", () => {
     expect(map.keys().sort()).toEqual(["a", "b", "c"].sort());
   });
 });
+
+describe("HashMap.values", () => {
+  test("returns empty array for empty map", () => {
+    const map = new HashMap();
+    expect(map.values()).toEqual([]);
+  });
+
+  test("returns all values (order not guaranteed)", () => {
+    const map = new HashMap();
+
+    map.set("a", 1);
+    map.set("b", 2);
+    map.set("c", 3);
+
+    expect(map.values().sort()).toEqual([1, 2, 3].sort());
+  });
+
+  test("includes values from collided buckets", () => {
+    const map = new HashMap();
+
+    map.capacity = 1;
+    map.buckets = Array(1).fill(null);
+
+    map.set("a", 1);
+    map.set("b", 2);
+    map.set("c", 3);
+
+    expect(map.values().sort()).toEqual([1, 2, 3].sort());
+  });
+});
