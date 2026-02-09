@@ -174,3 +174,37 @@ describe("HashMap.has", () => {
     expect(map.has("c")).toBe(false);
   });
 });
+
+describe("HashMap.remove", () => {
+  test("returns false when key does not exist", () => {
+    const map = new HashMap();
+
+    expect(map.remove("apple")).toBe(false);
+    expect(map.length()).toBe(0);
+  });
+
+  test("returns existing key and returns true", () => {
+    const map = new HashMap();
+
+    map.set("apple", "red");
+
+    expect(map.remove("apple")).toBe(true);
+    expect(map.get("apple")).toBeNull();
+    expect(map.length()).toBe(0);
+  });
+
+  test("removes only the matching key in a collided bucket", () => {
+    const map = new HashMap();
+
+    map.capacity = 1;
+    map.buckets = Array(1).fill(null);
+
+    map.set("a", 1);
+    map.set("b", 2);
+
+    expect(map.remove("a")).toBe(true);
+    expect(map.get("a")).toBeNull();
+    expect(map.get("b")).toBe(2);
+    expect(map.length()).toBe(1);
+  });
+});

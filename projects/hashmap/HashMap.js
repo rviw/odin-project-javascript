@@ -67,4 +67,23 @@ export class HashMap {
   has(key) {
     return this.get(key) !== null;
   }
+
+  remove(key) {
+    const index = this.hash(key);
+    this._assertIndexInBounds(index);
+
+    const list = this.buckets[index];
+    if (!list) return false;
+
+    const removed = list.remove(key);
+    if (!removed) return false;
+
+    this._size--;
+
+    if (list.entries().length === 0) {
+      this.buckets[index] = null;
+    }
+
+    return true;
+  }
 }
