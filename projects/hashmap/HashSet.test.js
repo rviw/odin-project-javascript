@@ -56,3 +56,34 @@ describe("HashSet.has", () => {
     expect(set.has("y")).toBe(false);
   });
 });
+
+describe("HashSet.remove", () => {
+  it("returns false when key does not exist", () => {
+    const set = createHashSet();
+
+    expect(set.remove("x")).toBe(false);
+    expect(set.size()).toBe(0);
+  });
+
+  it("removes an existing key and returns true", () => {
+    const set = createHashSet();
+
+    set.add("x");
+    set.add("y");
+
+    expect(set.remove("x")).toBe(true);
+    expect(set.has("x")).toBe(false);
+    expect(set.has("y")).toBe(true);
+    expect(set.size()).toBe(1);
+  });
+
+  it("can remove the only key in the set", () => {
+    const set = createHashSet();
+
+    set.add("x");
+
+    expect(set.remove("x")).toBe(true);
+    expect(set.size()).toBe(0);
+    expect(set.values()).toEqual([]);
+  });
+});
