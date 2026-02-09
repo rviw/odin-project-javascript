@@ -39,3 +39,20 @@ describe("HashSet.add", () => {
     expect(set.values().sort()).toEqual(["a", "b"].sort());
   });
 });
+
+describe("HashSet.has", () => {
+  it("returns false when key is not present", () => {
+    const set = createHashSet();
+
+    expect(set.has("x")).toBe(false);
+  });
+
+  it("returns true when key is present", () => {
+    const set = createHashSet();
+
+    set.add("x");
+
+    expect(set.has("x")).toBe(true);
+    expect(set.has("y")).toBe(false);
+  });
+});
