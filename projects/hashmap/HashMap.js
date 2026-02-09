@@ -91,4 +91,19 @@ export class HashMap {
     this.buckets = Array(this.capacity).fill(null);
     this._size = 0;
   }
+
+  keys() {
+    const result = [];
+
+    for (let i = 0; i < this.buckets.length; i++) {
+      const bucket = this.buckets[i];
+      if (!bucket) continue;
+
+      for (const [key] of bucket.entries()) {
+        result.push(key);
+      }
+    }
+
+    return result;
+  }
 }
