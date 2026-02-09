@@ -11,5 +11,9 @@ export function createHashSet() {
     values() {
       return map.keys();
     },
+
+    add(key) {
+      map.set(key, true);
+    },
   };
 }
