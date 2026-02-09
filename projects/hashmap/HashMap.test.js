@@ -106,3 +106,41 @@ describe("HashMap.set", () => {
     expect(() => map.set(123, "value")).toThrow(TypeError);
   });
 });
+
+describe("HashMap.get", () => {
+  test("returns null when key does not exist", () => {
+    const map = new HashMap();
+
+    expect(map.get("apple")).toBeNull();
+  });
+
+  test("returns value for existing key", () => {
+    const map = new HashMap();
+
+    map.set("apple", "red");
+
+    expect(map.get("apple")).toBe("red");
+  });
+
+  test("returns updated value after overwrite", () => {
+    const map = new HashMap();
+
+    map.set("apple", "red");
+    map.set("apple", "green");
+
+    expect(map.get("apple")).toBe("green");
+  });
+
+  test("retrieves values correctly from collided bucket", () => {
+    const map = new HashMap();
+
+    map.capacity = 1;
+    map.buckets = Array(1).fill(null);
+
+    map.set("a", 1);
+    map.set("b", 2);
+
+    expect(map.get("a")).toBe(1);
+    expect(map.get("b")).toBe(2);
+  });
+});

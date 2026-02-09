@@ -52,4 +52,15 @@ export class HashMap {
     list.append(key, value);
     this._size++;
   }
+
+  get(key) {
+    const index = this.hash(key);
+    this._assertIndexInBounds(index);
+
+    const list = this.buckets[index];
+    if (!list) return null;
+
+    const entry = list.find(key);
+    return entry ? entry.value : null;
+  }
 }
