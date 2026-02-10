@@ -250,3 +250,26 @@ describe("depth", () => {
     expect(tree.depth(100)).toBeUndefined();
   });
 });
+
+describe("isBalanced", () => {
+  test("returns true for a balanced tree", () => {
+    const tree = createTree([1, 2, 3, 4, 5, 6, 7]);
+    expect(tree.isBalanced()).toBe(true);
+  });
+
+  test("returns false for an unbalanced tree", () => {
+    const tree = createTree([1, 2, 3, 4, 5, 6, 7]);
+
+    tree.insert(100);
+    tree.insert(101);
+    tree.insert(102);
+    tree.insert(103);
+
+    expect(tree.isBalanced()).toBe(false);
+  });
+
+  test("returns true for emptry tree", () => {
+    const tree = createTree([]);
+    expect(tree.isBalanced()).toBe(true);
+  });
+});
