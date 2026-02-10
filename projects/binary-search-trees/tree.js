@@ -61,6 +61,40 @@ export const createTree = (array = []) => {
         }
       }
     },
+
+    deleteItem(value) {
+      const findMinNode = (node) => {
+        let current = node;
+        while (current && current.left) current = current.left;
+        return current;
+      };
+
+      const deleteRec = (node, target) => {
+        if (node === null) return null;
+
+        if (target < node.data) {
+          node.left = deleteRec(node.left, target);
+          return node;
+        }
+
+        if (target > node.data) {
+          node.right = deleteRec(node.right, target);
+          return node;
+        }
+
+        if (node.left === null && node.right === null) return null;
+
+        if (node.left === null) return node.right;
+        if (node.right === null) return node.left;
+
+        const successor = findMinNode(node.right);
+        node.data = successor.data;
+        node.right = deleteRec(node.right, successor.data);
+        return node;
+      };
+
+      this.root = deleteRec(this.root, value);
+    },
   };
 
   return tree;

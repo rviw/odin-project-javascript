@@ -74,3 +74,53 @@ describe("insert", () => {
     expect(tree.root.right).toBeNull();
   });
 });
+
+describe("deleteItem", () => {
+  test("does nothing if value does not exist", () => {
+    const tree = createTree([1, 2, 3]);
+
+    tree.deleteItem(10);
+
+    expect(tree.root.data).toBe(2);
+    expect(tree.root.left.data).toBe(1);
+    expect(tree.root.right.data).toBe(3);
+  });
+
+  test("deletes a leaf node", () => {
+    const tree = createTree([1, 2, 3]);
+
+    tree.deleteItem(1);
+
+    expect(tree.includes(1)).toBe(false);
+    expect(tree.root.left).toBeNull();
+    expect(tree.root.data).toBe(2);
+    expect(tree.root.right.data).toBe(3);
+  });
+
+  test("deletes a node with one child", () => {
+    const tree = createTree([1, 2, 3, 4]);
+
+    tree.deleteItem(2);
+
+    expect(tree.includes(2)).toBe(false);
+    expect(tree.root.left.data).toBe(1);
+  });
+
+  test("deletes a node with two children (uses inorder successor)", () => {
+    const tree = createTree([1, 2, 3, 4, 5, 6, 7]);
+
+    tree.deleteItem(4);
+
+    expect(tree.includes(4)).toBe(false);
+    expect(tree.root.data).toBe(5);
+  });
+
+  test("can delete the root until tree becomes empty", () => {
+    const tree = createTree([10]);
+
+    tree.deleteItem(10);
+
+    expect(tree.includes(10)).toBe(false);
+    expect(tree.root).toBeNull();
+  });
+});
