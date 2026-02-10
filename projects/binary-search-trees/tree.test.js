@@ -149,3 +149,52 @@ describe("levelOrderForEach", () => {
     expect(result).toEqual([]);
   });
 });
+
+describe("depth-first traversals", () => {
+  let tree;
+
+  beforeEach(() => {
+    tree = createTree([1, 2, 3, 4, 5, 6, 7]);
+    // balanced BST structure
+    //           4
+    //       2       6
+    //     1   3   5   7
+  });
+
+  test("inOrderForEach traverses in-order", () => {
+    const result = [];
+    tree.inOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([1, 2, 3, 4, 5, 6, 7]);
+  });
+
+  test("preOrderForEach traverses pre-order", () => {
+    const result = [];
+    tree.preOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([4, 2, 1, 3, 6, 5, 7]);
+  });
+
+  test("postOrderForEach traverses post-order", () => {
+    const result = [];
+    tree.postOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([1, 3, 2, 5, 7, 6, 4]);
+  });
+
+  test("throws error if callback is missing", () => {
+    const tree = createTree([1, 2, 3]);
+    expect(() => tree.inOrderForEach()).toThrow(Error);
+    expect(() => tree.preOrderForEach()).toThrow(Error);
+    expect(() => tree.postOrderForEach()).toThrow(Error);
+  });
+
+  test("doest nothing on empty tree (but still requires callback)", () => {
+    const tree = createTree([]);
+
+    const result = [];
+    tree.inOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([]);
+  });
+});
