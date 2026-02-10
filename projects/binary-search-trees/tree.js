@@ -95,6 +95,43 @@ export const createTree = (array = []) => {
 
       this.root = deleteRec(this.root, value);
     },
+
+    levelOrderForEach(callback) {
+      if (typeof callback !== "function") {
+        throw new Error("Callback is required");
+      }
+
+      if (this.root === null) return;
+
+      // Iteration
+
+      const queue = [this.root];
+
+      for (let i = 0; i < queue.length; i += 1) {
+        const node = queue[i];
+        callback(node.data);
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+      }
+
+      // Recursion
+
+      //   const traverseByLevels = (nodes) => {
+      //     if (nodes.length === 0) return;
+
+      //     const nextLevel = [];
+
+      //     for (const node of nodes) {
+      //       callback(node.data);
+      //       if (node.left) nextLevel.push(node.left);
+      //       if (node.right) nextLevel.push(node.right);
+      //     }
+
+      //     traverseByLevels(nextLevel);
+      //   };
+
+      //   traverseByLevels([this.root]);
+    },
   };
 
   return tree;

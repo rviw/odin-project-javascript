@@ -124,3 +124,28 @@ describe("deleteItem", () => {
     expect(tree.root).toBeNull();
   });
 });
+
+describe("levelOrderForEach", () => {
+  test("traverses tree in level-order (BFS)", () => {
+    const tree = createTree([1, 2, 3, 4, 5, 6, 7]);
+
+    const result = [];
+    tree.levelOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([4, 2, 6, 1, 3, 5, 7]);
+  });
+
+  test("throws error if callback is not provided", () => {
+    const tree = createTree([1, 2, 3]);
+    expect(() => tree.levelOrderForEach()).toThrow(Error);
+  });
+
+  test("doest nothing on empty tree (but still requires callback)", () => {
+    const tree = createTree([]);
+
+    const result = [];
+    tree.levelOrderForEach((value) => result.push(value));
+
+    expect(result).toEqual([]);
+  });
+});
