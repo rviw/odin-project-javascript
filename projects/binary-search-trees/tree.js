@@ -228,6 +228,13 @@ export const createTree = (array = []) => {
 
       return checkHeight(this.root) !== -1;
     },
+
+    rebalance() {
+      const values = [];
+      this.inOrderForEach((value) => values.push(value));
+
+      this.root = buildTree(values);
+    },
   };
 
   return tree;

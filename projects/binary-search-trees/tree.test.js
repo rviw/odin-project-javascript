@@ -273,3 +273,31 @@ describe("isBalanced", () => {
     expect(tree.isBalanced()).toBe(true);
   });
 });
+
+describe("rebalance", () => {
+  test("rebalances an unbalanced tree", () => {
+    const tree = createTree([1, 2, 3, 4, 5, 6, 7]);
+
+    tree.insert(100);
+    tree.insert(101);
+    tree.insert(102);
+    tree.insert(103);
+
+    expect(tree.isBalanced()).toBe(false);
+
+    tree.rebalance();
+
+    expect(tree.isBalanced()).toBe(true);
+
+    const values = [];
+    tree.inOrderForEach((value) => values.push(value));
+    expect(values).toEqual([1, 2, 3, 4, 5, 6, 7, 100, 101, 102, 103]);
+  });
+
+  test("rebalance keeps empty tree as empty", () => {
+    const tree = createTree([]);
+    tree.rebalance();
+    expect(tree.root).toBeNull();
+    expect(tree.isBalanced()).toBe(true);
+  });
+});
