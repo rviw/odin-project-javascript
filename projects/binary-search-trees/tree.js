@@ -32,6 +32,35 @@ export const createTree = (array = []) => {
 
       return false;
     },
+
+    insert(value) {
+      if (this.root === null) {
+        this.root = createNode(value);
+        return;
+      }
+
+      let current = this.root;
+
+      while (true) {
+        if (value === current.data) {
+          return;
+        }
+
+        if (value < current.data) {
+          if (current.left === null) {
+            current.left = createNode(value);
+            return;
+          }
+          current = current.left;
+        } else {
+          if (current.right === null) {
+            current.right = createNode(value);
+            return;
+          }
+          current = current.right;
+        }
+      }
+    },
   };
 
   return tree;

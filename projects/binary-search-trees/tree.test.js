@@ -44,3 +44,33 @@ describe("includes", () => {
     expect(tree.includes(1)).toBe(false);
   });
 });
+
+describe("insert", () => {
+  test("inserts value into correct position", () => {
+    const tree = createTree([1, 3, 5, 7, 9]);
+
+    tree.insert(4);
+
+    expect(tree.root.left.right.data).toBe(4);
+  });
+
+  test("does nothing if value already exists", () => {
+    const tree = createTree([1, 2, 3]);
+
+    tree.insert(2);
+
+    expect(tree.root.data).toBe(2);
+    expect(tree.root.left.data).toBe(1);
+    expect(tree.root.right.data).toBe(3);
+  });
+
+  test("insert into empty tree as root", () => {
+    const tree = createTree([]);
+
+    tree.insert(10);
+
+    expect(tree.root.data).toBe(10);
+    expect(tree.root.left).toBeNull();
+    expect(tree.root.right).toBeNull();
+  });
+});
