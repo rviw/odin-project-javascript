@@ -18,9 +18,23 @@ const buildTree = (sortedUniqueArray) => {
 
 export const createTree = (array = []) => {
   const values = sortUnique(array);
-  return {
+
+  const tree = {
     root: buildTree(values),
+
+    includes(value) {
+      let current = this.root;
+
+      while (current) {
+        if (value === current.data) return true;
+        current = value < current.data ? current.left : current.right;
+      }
+
+      return false;
+    },
   };
+
+  return tree;
 };
 
 // const prettyPrint = (node, prefix = "", isLeft = true) => {

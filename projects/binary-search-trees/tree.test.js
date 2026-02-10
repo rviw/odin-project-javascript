@@ -22,3 +22,25 @@ describe("createTree", () => {
     expect(tree.root.right.data).toBe(3);
   });
 });
+
+describe("includes", () => {
+  test("returns true when value exists", () => {
+    const tree = createTree([1, 2, 3]);
+
+    expect(tree.includes(1)).toBe(true);
+    expect(tree.includes(2)).toBe(true);
+    expect(tree.includes(3)).toBe(true);
+  });
+
+  test("returns false when value does not exist", () => {
+    const tree = createTree([1, 2, 3]);
+
+    expect(tree.includes(100)).toBe(false);
+  });
+
+  test("returns false for empty tree", () => {
+    const tree = createTree([]);
+
+    expect(tree.includes(1)).toBe(false);
+  });
+});
