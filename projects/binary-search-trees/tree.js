@@ -177,6 +177,39 @@ export const createTree = (array = []) => {
 
       traverse(this.root);
     },
+
+    height(value) {
+      const findNode = (node, target) => {
+        if (node === null) return null;
+        if (target === node.data) return node;
+        return target < node.data
+          ? findNode(node.left, target)
+          : findNode(node.right, target);
+      };
+
+      const node = findNode(this.root, value);
+      if (!node) return undefined;
+
+      const getHeight = (n) => {
+        if (n === null) return -1;
+        return 1 + Math.max(getHeight(n.left), getHeight(n.right));
+      };
+
+      return getHeight(node);
+    },
+
+    depth(value) {
+      let current = this.root;
+      let depth = 0;
+
+      while (current) {
+        if (value === current.data) return depth;
+        current = value < current.data ? current.left : current.right;
+        depth++;
+      }
+
+      return undefined;
+    },
   };
 
   return tree;

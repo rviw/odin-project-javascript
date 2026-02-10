@@ -198,3 +198,55 @@ describe("depth-first traversals", () => {
     expect(result).toEqual([]);
   });
 });
+
+describe("height", () => {
+  let tree;
+
+  beforeEach(() => {
+    tree = createTree([1, 2, 3, 4, 5, 6, 7]);
+    // balanced BST structure
+    //           4
+    //       2       6
+    //     1   3   5   7
+  });
+
+  test("returns height of a node", () => {
+    expect(tree.height(1)).toBe(0);
+    expect(tree.height(3)).toBe(0);
+
+    expect(tree.height(2)).toBe(1);
+    expect(tree.height(6)).toBe(1);
+
+    expect(tree.height(4)).toBe(2);
+  });
+
+  test("returns undefined if value is not found", () => {
+    expect(tree.height(100)).toBeUndefined();
+  });
+});
+
+describe("depth", () => {
+  let tree;
+
+  beforeEach(() => {
+    tree = createTree([1, 2, 3, 4, 5, 6, 7]);
+    // balanced BST structure
+    //           4
+    //       2       6
+    //     1   3   5   7
+  });
+
+  test("returns depth of a node", () => {
+    expect(tree.depth(4)).toBe(0);
+
+    expect(tree.depth(2)).toBe(1);
+    expect(tree.depth(6)).toBe(1);
+
+    expect(tree.depth(3)).toBe(2);
+    expect(tree.depth(7)).toBe(2);
+  });
+
+  test("returns undefined if value is not found", () => {
+    expect(tree.depth(100)).toBeUndefined();
+  });
+});
